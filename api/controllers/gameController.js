@@ -6,14 +6,12 @@ var Houses = require('../models/gameModel');
 var House = mongoose.model('Houses');
 
 exports.listHouses = function(req, res) {
-    try{
-        House.find({}, function(err, house) {
-            return res.json(house);
-        });
-    }catch(err){
-        return res.send(err);
-    }
-    
+    House.find({}, function(err, house) {
+        if (err)
+            res.send(err);
+        return res.json(house);
+    })
+        
 };
 
 exports.includeHouse = function(req, res) {
